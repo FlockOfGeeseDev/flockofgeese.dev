@@ -1,25 +1,56 @@
-/* FlockOfGeese.dev — static landing (GitHub Pages) */
+/* FlockOfGeese.dev — design system foundation */
 
 :root {
-  --bg-page: #fdfbf7;
-  --bg-hill: #f3efe8;
-  --text-primary: #1a202c;
-  --text-muted: #64748b;
-  --text-muted-light: #94a3b8;
-  --accent: #e67e22;
-  --accent-hover: #d35400;
-  --white: #ffffff;
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --border-subtle: #e2e8f0;
-  --badge-bg: #d1fae5;
-  --badge-text: #065f46;
-  --icon-gradient-top: #6ee7b7;
-  --icon-gradient-bottom: #0d9488;
-  --garmin-box-bg: #f8fafc;
-  --strava-orange: #fc5200;
+  /* Color tokens */
+  --color-bg-canvas: #fdfbf7;
+  --color-bg-subtle: #f3efe8;
+  --color-surface: #ffffff;
+  --color-text-primary: #1a202c;
+  --color-text-secondary: #64748b;
+  --color-text-tertiary: #94a3b8;
+  --color-accent: #e67e22;
+  --color-accent-strong: #d35400;
+  --color-border-subtle: #e2e8f0;
+  --color-success-bg: #d1fae5;
+  --color-success-fg: #065f46;
+
+  /* Product accents */
+  --color-icon-top: #6ee7b7;
+  --color-icon-bottom: #0d9488;
+  --color-garmin-surface: #f8fafc;
+  --color-strava: #fc5200;
+
+  /* Typography */
+  --font-sans: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+  --font-size-00: 0.75rem;
+  --font-size-0: 0.875rem;
+  --font-size-1: 1rem;
+  --font-size-2: 1.125rem;
+  --font-size-3: 1.35rem;
+  --font-size-4: 1.5rem;
+  --line-height-tight: 1.15;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.65;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* Radius, shadow, layout */
+  --radius-sm: 6px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-accent-hover: 0 1px 8px rgba(230, 126, 34, 0.12);
   --max-width: 1040px;
-  --font: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
 }
 
 *,
@@ -34,11 +65,11 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font);
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--text-primary);
-  background: var(--bg-page);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background: var(--color-bg-canvas);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -63,20 +94,98 @@ a {
   width: 100%;
   max-width: var(--max-width);
   margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 2rem);
+  padding-inline: clamp(var(--space-5), 4vw, var(--space-8));
 }
 
-/* ----- Header ----- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reusable primitives */
+.ds-section {
+  position: relative;
+}
+
+.ds-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.ds-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1.1rem;
+  font-size: var(--font-size-0);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+a.ds-button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: var(--shadow-accent-hover);
+}
+
+.ds-input {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 10px;
+  font: inherit;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+}
+
+.ds-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.ds-input:focus-visible {
+  outline: 2px solid rgba(230, 126, 34, 0.35);
+  outline-offset: 1px;
+}
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-success-fg);
+  background: var(--color-success-bg);
+  border-radius: var(--radius-pill);
+}
 
 .site-header {
-  padding-block: 1.5rem 0.5rem;
+  padding-block: var(--space-6) var(--space-2);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .brand {
@@ -100,45 +209,48 @@ a {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--space-6);
 }
 
 .nav-link {
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--text-primary);
-  border-bottom: 2px solid var(--text-primary);
+  color: var(--color-text-primary);
+  border-bottom: 2px solid var(--color-text-primary);
   padding-bottom: 2px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .nav-link:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.nav-link--active {
+  color: var(--color-text-primary);
+  border-color: #2d5cbf;
 }
 
 .icon-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   opacity: 0.85;
   transition: opacity 0.15s ease, color 0.15s ease;
 }
 
 .icon-link:hover {
   opacity: 1;
-  color: var(--accent);
+  color: var(--color-accent);
 }
 
 .icon-link svg {
   display: block;
 }
 
-/* ----- Hero ----- */
-
 .hero {
-  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(2.5rem, 6vw, 4rem);
+  padding-block: clamp(var(--space-8), 5vw, 3.5rem) clamp(var(--space-10), 6vw, 4rem);
   text-align: center;
 }
 
@@ -156,21 +268,21 @@ a {
 }
 
 .hero-lede {
-  margin: 1.25rem auto 0;
+  margin: var(--space-5) auto 0;
   max-width: 36rem;
-  font-size: clamp(1rem, 2.2vw, 1.125rem);
-  color: var(--text-muted);
+  font-size: clamp(var(--font-size-1), 2.2vw, var(--font-size-2));
+  color: var(--color-text-secondary);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: var(--line-height-relaxed);
 }
 
 .hero-lede .accent {
-  color: var(--accent);
+  color: var(--color-accent);
   font-weight: 600;
 }
 
 .hero-art {
-  margin-top: clamp(2rem, 5vw, 3rem);
+  margin-top: clamp(var(--space-8), 5vw, var(--space-12));
   display: flex;
   justify-content: center;
 }
@@ -180,20 +292,18 @@ a {
   height: auto;
 }
 
-/* ----- Projects ----- */
-
 .projects {
   padding-block: 0 4rem;
 }
 
 .section-head {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-8);
 }
 
 .section-title {
   margin: 0;
-  font-size: clamp(1.35rem, 3vw, 1.5rem);
+  font-size: clamp(var(--font-size-3), 3vw, var(--font-size-4));
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -202,20 +312,24 @@ a {
   width: 48px;
   height: 4px;
   margin: 0.65rem auto 0;
-  background: var(--accent);
+  background: var(--color-accent);
   border-radius: 2px;
 }
 
-/* ----- Project card ----- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
 
 .project-card {
   display: flex;
   align-items: stretch;
-  gap: clamp(1.25rem, 3vw, 2rem);
-  padding: clamp(1.25rem, 3vw, 1.75rem);
-  background: var(--white);
-  border-radius: 16px;
-  box-shadow: var(--card-shadow);
+  gap: clamp(var(--space-5), 3vw, var(--space-8));
+  padding: clamp(var(--space-5), 3vw, 1.75rem);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
 }
 
 .project-icon-wrap {
@@ -225,12 +339,8 @@ a {
 .project-icon {
   width: 88px;
   height: 88px;
-  border-radius: 20px;
-  background: linear-gradient(
-    180deg,
-    var(--icon-gradient-top) 0%,
-    var(--icon-gradient-bottom) 100%
-  );
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--color-icon-top) 0%, var(--color-icon-bottom) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,63 +357,54 @@ a {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-3);
 }
 
 .project-title-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem 0.75rem;
+  gap: var(--space-2) var(--space-3);
 }
 
 .project-name {
   margin: 0;
-  font-size: clamp(1.2rem, 2.5vw, 1.35rem);
+  font-size: clamp(1.2rem, 2.5vw, var(--font-size-3));
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.2rem 0.65rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
   text-transform: none;
-  color: var(--badge-text);
-  background: var(--badge-bg);
-  border-radius: 999px;
 }
 
 .project-desc {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--text-muted);
+  color: var(--color-text-secondary);
   max-width: 52ch;
 }
 
 .project-footer {
   margin-top: auto;
-  padding-top: 0.5rem;
+  padding-top: var(--space-2);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .flow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.35rem 0.5rem;
+  gap: 0.35rem var(--space-2);
 }
 
 .flow-arrow {
-  color: var(--text-muted-light);
+  color: var(--color-text-tertiary);
   flex-shrink: 0;
 }
 
@@ -312,23 +413,22 @@ a {
   align-items: center;
   justify-content: center;
   padding: 0.35rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid var(--border-subtle);
-  background: var(--garmin-box-bg);
-  font-size: 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-garmin-surface);
+  font-size: var(--font-size-00);
   font-weight: 800;
   letter-spacing: 0.04em;
 }
 
 .flow-box--garmin {
   color: #1e293b;
-  font-family: var(--font);
 }
 
 .flow-box--strava {
-  background: var(--white);
+  background: var(--color-surface);
   border-color: #fed7aa;
-  color: var(--strava-orange);
+  color: var(--color-strava);
   font-style: italic;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -338,35 +438,53 @@ a {
 .btn-learn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.55rem 1.1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  background: var(--white);
-  border: 1px solid var(--border-subtle);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 
 a.btn-learn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: 0 1px 8px rgba(230, 126, 34, 0.12);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: var(--shadow-accent-hover);
 }
 
-/* ----- Footer ----- */
+.ds-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.ds-showcase-card {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ds-showcase-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.ds-showcase-text {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+  min-height: 2.8em;
+}
+
+.ds-nav-demo {
+  justify-content: flex-start;
+  gap: var(--space-4);
+}
 
 .site-footer {
   margin-top: auto;
-  padding-block: 3rem 2.5rem;
+  padding-block: var(--space-12) var(--space-10);
   text-align: center;
 }
 
 .footer-print {
-  margin: 0 auto 0.75rem;
-  color: var(--accent);
+  margin: 0 auto var(--space-3);
+  color: var(--color-accent);
   display: flex;
   justify-content: center;
 }
@@ -379,10 +497,8 @@ a.btn-learn:hover {
 .footer-copy {
   margin: 0;
   font-size: 0.8rem;
-  color: var(--text-muted-light);
+  color: var(--color-text-tertiary);
 }
-
-/* ----- Responsive ----- */
 
 @media (max-width: 700px) {
   .project-card {
@@ -416,11 +532,19 @@ a.btn-learn:hover {
     justify-content: center;
     width: 100%;
   }
+
+  .ds-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    gap: var(--space-4);
+  }
 }
 
 @media (max-width: 480px) {
   .nav-actions {
-    gap: 1rem;
+    gap: var(--space-4);
   }
 
   .brand-name {

@@ -1,4 +1,5 @@
 import { Github } from "lucide-react";
+import posthog from "posthog-js";
 import gooseMark from "@/assets/goose-mark.png";
 
 export function SiteHeader() {
@@ -21,6 +22,7 @@ export function SiteHeader() {
           <a
             href="#projects"
             className="font-mono text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => posthog.capture("projects_nav_clicked")}
           >
             Projects
           </a>
@@ -30,6 +32,7 @@ export function SiteHeader() {
             target="_blank"
             rel="noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => posthog.capture("github_link_clicked", { location: "header" })}
           >
             <Github className="h-5 w-5" />
           </a>

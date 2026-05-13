@@ -1,4 +1,5 @@
 import { Github } from "lucide-react";
+import posthog from "posthog-js";
 
 export function SiteFooter() {
   return (
@@ -13,6 +14,7 @@ export function SiteFooter() {
           rel="noreferrer"
           aria-label="GitHub"
           className="text-muted-foreground hover:text-foreground transition-colors"
+          onClick={() => posthog.capture("github_link_clicked", { location: "footer" })}
         >
           <Github className="h-5 w-5" />
         </a>

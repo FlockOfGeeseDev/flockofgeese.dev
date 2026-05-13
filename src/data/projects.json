@@ -1,0 +1,18 @@
+{
+  "projects": [
+    {
+      "slug": "syncgoose",
+      "name": "SyncGoose",
+      "platform": "iOS App",
+      "tagline": "Sync your Apple Health weight to Garmin and Strava. Automatically. Securely. Effortlessly.",
+      "icon": "syncgoose",
+      "integrations": [
+        { "name": "Apple Health", "short": "AH", "tone": "red" },
+        { "name": "Garmin", "short": "GA", "tone": "neutral" },
+        { "name": "Strava", "short": "ST", "tone": "orange" }
+      ],
+      "cta": { "label": "App Store", "href": "https://www.apple.com/app-store/" },
+      "hide": true
+    }
+  ]
+}
